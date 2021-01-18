@@ -20,6 +20,8 @@
     "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^3.1.2",
     "cross-env": "^7.0.3",
+    "formik": "^2.2.6",
+    "formik-chakra-ui": "^1.2.6",
     "framer-motion": ">=3.0.0",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
@@ -35,13 +37,14 @@
     "react-scripts": "4.0.1",
     "react-select": "^3.1.1",
     "redux-localstorage-simple": "^2.3.1",
-    "web-vitals": "^0.2.2"
+    "web-vitals": "^0.2.2",
+    "yup": "^0.32.8"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "react-app-env start",
+    "build": "react-app-env build",
+    "test": "react-app-env test",
+    "eject": "react-app-env eject",
     "dev-wallet": "PK=707f53bf5e511ffc93ab91054285a59f6bbc68a8a0255dfeee08c4e63af54d3b fcl-wallet",
     "dev-wallet-win": "SET PK=84f82df6790f07b281adb5bbc848bd6298a2de67f94bdfac7a400d5a1b893de5 && fcl-wallet"
   },
@@ -62,7 +65,7 @@
   },
   "devDependencies": {
     "@onflow/dev-wallet": "^0.0.10",
-    "dotenv": "^8.2.0",
+    "react-app-env": "^1.2.3",
     "typescript": "^3.9.5"
   }
 }

@@ -1,13 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from "react";
+import { Container, Box, Button } from "@chakra-ui/react";
+import { useHistory } from "react-router-dom";
 
-import Container from '../../components/Container'
+import Cont from "../../components/Container";
 
-
-export default function fungibleTokens() {
-
+export default function FungibleTokens() {
+  const history = useHistory()
   return (
-    <Container>
-        thats fts
-    </Container>
-  )
+    <Cont>
+      <Container maxW='xl' centerContent>
+        <Box p={4}>
+          <Button
+            size='md'
+            height='48px'
+            width='200px'
+            border='2px'
+            onClick={()=>history.push('issue')}
+          >
+            Issues your token
+          </Button>
+        </Box>
+      </Container>
+    </Cont>
+  );
 }

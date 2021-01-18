@@ -1,14 +1,14 @@
 import { firstUpperCase } from '../../../utils'
 
 
-export const useTemplates = (contractName: string = 'Token', totalSupply: number = 0.0) => {
+export const useTemplates = (contractName: string = 'Token') => {
 
     contractName = firstUpperCase(contractName)
 
     const fungibleToken = () => {
 
         const template = `
-            import FungibleToken from 0x${process.env.FUNGIBLE_TOKEN_ADDRESS}
+            import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
 
             pub contract ${contractName}: FungibleToken {
                 // TokensInitialized
@@ -176,7 +176,7 @@ export const useTemplates = (contractName: string = 'Token', totalSupply: number
                     self.AdminStoragePath = /storage/${contractName}Admin
 
                     // Initialize contract state.
-                    self.totalSupply = ${totalSupply}
+                    self.totalSupply = 0.0
 
                     // Create the one true Admin object and deposit it into the conttract account.
                     let admin <- create Administrator()

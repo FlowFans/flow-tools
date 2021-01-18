@@ -11,12 +11,9 @@ import { App } from "./pages/App"
 import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
 
-import dotenv from 'dotenv'
 import './i18n'
 import store from './state'
 
-
-dotenv.config()
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
 if (typeof GOOGLE_ANALYTICS_ID === 'string') {

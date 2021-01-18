@@ -1,4 +1,3 @@
-import { UserInfo } from 'os'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -6,7 +5,7 @@ import { AppDispatch, AppState } from '../index'
 import {
   updateTheme, updateUserInfo,
 } from './actions'
-import {userInfo} from '../../constants/types'
+import {UserInfo} from '../../constants/types'
 
 
 
@@ -24,7 +23,7 @@ export function useThemeManager(): [string | null, (t:string) => void] {
 
 
 
-export function useUserInfo(): [userInfo, (t:userInfo) => void] {
+export function useUserInfo(): [UserInfo, (t:UserInfo) => void] {
   const dispatch = useDispatch<AppDispatch>()
   const userInfo = useSelector<AppState, AppState['user']['userInfo']>(state => state.user.userInfo)
   const setUser = useCallback((userInfo: {loggedIn: boolean}) => {

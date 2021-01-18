@@ -4,7 +4,7 @@ import * as fcl from "@onflow/fcl"
 import { Box, Flex, Spacer, Button } from "@chakra-ui/react";
 import { useThemeManager, useUserInfo } from "../../state/user/hooks";
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
-import {userInfo as User} from '../../constants/types'
+import {UserInfo as User} from '../../constants/types'
 type HeaderProps = {};
 
 interface SignInOutButtonProps {

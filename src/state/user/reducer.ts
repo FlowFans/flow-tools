@@ -4,7 +4,7 @@ import {
   updateTheme,
   updateUserInfo
 } from './actions'
-import {userInfo} from '../../constants/types'
+import {UserInfo} from '../../constants/types'
 
 
 const currentTimestamp = () => new Date().getTime()
@@ -12,7 +12,7 @@ const currentTimestamp = () => new Date().getTime()
 
 export interface UserState {
   theme: string  // the user's choice for dark mode or light mode
-  userInfo: userInfo 
+  userInfo: UserInfo 
   timestamp: number
 }
 

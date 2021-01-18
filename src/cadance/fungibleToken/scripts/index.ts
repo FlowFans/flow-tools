@@ -4,7 +4,7 @@ export const useQueryFuncs = (contractAddr: string, contractName:string) => {
     contractName = firstUpperCase(contractName)
     const getBalances = () => {
         const template = `
-        import FungibleToken from 0x${process.env.FUNGIBLE_TOKEN_ADDRESS}
+        import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
         import ${contractName} from ${contractAddr}
 
         pub fun main(account: Address): UFix64 {
