@@ -15,7 +15,7 @@ export default function FungibleTokens() {
             height='48px'
             width='200px'
             border='2px'
-            onClick={()=>history.push('issue')}
+            onClick={()=>history.push('ft/issue')}
           >
             Issues your token
           </Button>

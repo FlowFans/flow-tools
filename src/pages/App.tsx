@@ -7,7 +7,7 @@ import {
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import '../config'
 import theme from '../themes'
-import {useThemeManager} from '../state/user/hooks'
+import {useCurrentTheme} from '../hooks/useCurrentTheme'
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -22,7 +22,7 @@ import FungibleTokenIssue from './fungibleTokenIssue'
 
 export const App = () => {
 
-  const [currTheme] = useThemeManager()
+  const [currTheme] = useCurrentTheme()
   const color = `text.${currTheme}`
   const background = `background.${currTheme}`
   return (

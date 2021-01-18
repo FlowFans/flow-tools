@@ -19,6 +19,7 @@
     "@types/react-redux": "^7.1.15",
     "@types/react-router-dom": "^5.1.7",
     "@types/react-select": "^3.1.2",
+    "@types/recoil": "^0.0.1",
     "cross-env": "^7.0.3",
     "formik": "^2.2.6",
     "formik-chakra-ui": "^1.2.6",
@@ -36,6 +37,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "react-select": "^3.1.1",
+    "recoil": "^0.1.2",
     "redux-localstorage-simple": "^2.3.1",
     "web-vitals": "^0.2.2",
     "yup": "^0.32.8"

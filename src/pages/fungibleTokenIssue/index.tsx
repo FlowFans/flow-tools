@@ -18,7 +18,9 @@ import {SubmitFunc} from '../../constants/types'
 export default function FungibleTokenIssue() {
 
   const handleSubmit:SubmitFunc = async (values, actions) => {
-
+    console.log(values)
+    actions.setSubmitting(false)
+    actions.resetForm()
   }
 
   return (
@@ -26,6 +28,9 @@ export default function FungibleTokenIssue() {
       <Container maxW='xl' centerContent>
         <Box p={4}>
           <FungibleTokenForm onSubmit={handleSubmit}/>
+        </Box>
+        <Box p={4}>
+
         </Box>
       </Container>
     </Cont>

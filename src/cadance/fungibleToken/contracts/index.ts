@@ -5,7 +5,7 @@ export const useTemplates = (contractName: string = 'Token') => {
 
     contractName = firstUpperCase(contractName)
 
-    const fungibleToken = () => {
+    const fungibleTokenContractTemplate = () => {
 
         const template = `
             import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
@@ -190,6 +190,6 @@ export const useTemplates = (contractName: string = 'Token') => {
         return template
     }
     return {
-        fungibleToken
+        fungibleTokenContractTemplate
     }
 }

@@ -1,7 +1,6 @@
 import { ColorModeScript } from "@chakra-ui/react"
 import * as React from "react"
 import ReactDOM from "react-dom"
-import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
 // import { CONFIG } from './constants'
 import ReactGA from 'react-ga'
@@ -10,9 +9,9 @@ import { isMobile } from 'react-device-detect'
 import { App } from "./pages/App"
 import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
+import {RecoilRoot} from "recoil"
 
 import './i18n'
-import store from './state'
 
 
 const GOOGLE_ANALYTICS_ID: string | undefined = process.env.REACT_APP_GOOGLE_ANALYTICS_ID
@@ -35,12 +34,12 @@ window.addEventListener('error', error => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    <RecoilRoot>
       <ColorModeScript />
         <HashRouter>
           <App />
         </HashRouter>
-    </Provider>
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root"),
 )

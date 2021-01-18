@@ -2,7 +2,9 @@ import React, {useEffect, FC} from "react";
 import * as fcl from "@onflow/fcl"
 
 import { Box, Flex, Spacer, Button } from "@chakra-ui/react";
-import { useThemeManager, useUserInfo } from "../../state/user/hooks";
+// import { useThemeManager, useUserInfo } from "../../state/user/hooks";
+import { useCurrentTheme} from '../../hooks/useCurrentTheme'
+import { useCurrentUser} from '../../hooks/useCurrentUser'
 import { ColorModeSwitcher } from "../ColorModeSwitcher";
 import {UserInfo as User} from '../../constants/types'
 type HeaderProps = {};
@@ -12,14 +14,14 @@ interface SignInOutButtonProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const [theme] = useThemeManager()
-  const [userInfo, setUserInfo] = useUserInfo()
+  const [theme] = useCurrentTheme()
+  const [userInfo, isLogin, tools] = useCurrentUser()
 
-  const SignInOutButton : FC<SignInOutButtonProps> = ({ user: { loggedIn } }) => {
+  const SignInOutButton : FC<SignInOutButtonProps> = ({ user}) => {
     const signInOrOut = async (event: any) => {
       event.preventDefault()
   
-      if (loggedIn) {
+      if (user.loggedIn) {
         fcl.unauthenticate()
       } else {
         fcl.authenticate()
@@ -28,16 +30,11 @@ const Header = (props: HeaderProps) => {
   
     return (
       <Button onClick={signInOrOut}>
-        {loggedIn ? 'Sign Out' : 'Sign In/Up'}
+        {user.loggedIn ? 'Sign Out' : 'Sign In/Up'}
       </Button>
     )
   }
 
-  useEffect(() =>
-    fcl
-      .currentUser()
-      .subscribe((user: any) => setUserInfo({...user}))
-  , [])
 
 
   return (

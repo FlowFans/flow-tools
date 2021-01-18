@@ -1,7 +1,4 @@
-import {useQueryFuncs} from './scripts'
-import {useTemplates} from './contracts'
+import { useQueryTemplate } from "./scripts";
+import { useTemplates } from "./contracts";
 
-export {
-    useQueryFuncs,
-    useTemplates
-}
+export { useQueryTemplate, useTemplates };
