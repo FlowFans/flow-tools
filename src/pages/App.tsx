@@ -13,12 +13,12 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 import Home from './home'
-import Wallet from './wallet'
-import Config from './config'
+// import Wallet from './wallet'
+// import Config from './config'
 import FungibleTokens from './fungibleTokens'
 import FungibleTokenDetail from './fungibleTokenDetail'
 import FungibleTokenIssue from './fungibleTokenIssue'
-
+import Account from './account'
 
 export const App = () => {
 
@@ -32,8 +32,9 @@ export const App = () => {
       <Box bg={background} w="100%" minH="100vh" color={color}>
         <Header />
         <Switch>
-              <Route exact strict path="/wallet" component={Wallet} />
-              <Route exact strict path="/config" component={Config} />
+              {/* <Route exact strict path="/wallet" component={Wallet} /> */}
+              {/* <Route exact strict path="/config" component={Config} /> */}
+              <Route exact strict path="/account/:address" component={Account} />
               <Route exact strict path="/ft" component={FungibleTokens} />
               <Route exact strict path="/ft/issue" component={FungibleTokenIssue} />
               <Route exact strict path="/ft/:contractAddress/:contractName" component={FungibleTokenDetail} />

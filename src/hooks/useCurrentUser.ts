@@ -1,7 +1,7 @@
 import {useEffect} from "react"
-import {atom, useRecoilState} from "recoil"
+import {atom, useRecoilState, SetterOrUpdater} from "recoil"
 import * as fcl from "@onflow/fcl"
-import {UserInfo} from '../constants/types'
+import {UserInfo, Account} from '../constants/types'
 
 export const currentUser = atom({
   key: "CURRENT_USER",
@@ -20,3 +20,5 @@ export function useCurrentUser():[UserInfo, boolean, any ] {
   useEffect(() => fcl.currentUser().subscribe(setUser), [setUser])
   return [user, user.addr != null, tools]
 }
+
+

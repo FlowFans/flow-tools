@@ -20,7 +20,7 @@ interface FormValues {
 }
 
 const FungibleTokenForm = ({onSubmit}:FormProps) => {
-  const initialValues: FormValues = { contractName: "Token" };
+  const initialValues: FormValues = { contractName: "" };
 
   const validationSchema = Yup.object({
     contractName: Yup.string().required(),

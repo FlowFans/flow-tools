@@ -19,9 +19,21 @@ export interface Key{
     sequenceNumber: number
 }
 export interface Account {
-    address: string
+    addr: string
     balance: number
     code: string
-    contracts: any
-    keys:Key[]
+    contracts?: any
+    keys?:Key[]
 }
+
+
+export type TxOpts = {
+    onStart?: Function
+    onSubmission?: Function
+    onUpdate?: Function
+    onSuccess?: Function
+    onError?: Function
+    onComplete?: Function
+}
+
+// export interface TX any[]

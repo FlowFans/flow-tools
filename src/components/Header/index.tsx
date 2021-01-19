@@ -2,6 +2,8 @@ import React, {useEffect, FC} from "react";
 import * as fcl from "@onflow/fcl"
 
 import { Box, Flex, Spacer, Button } from "@chakra-ui/react";
+// import {useHistory} from "react-router-dom"
+
 // import { useThemeManager, useUserInfo } from "../../state/user/hooks";
 import { useCurrentTheme} from '../../hooks/useCurrentTheme'
 import { useCurrentUser} from '../../hooks/useCurrentUser'
@@ -16,6 +18,10 @@ interface SignInOutButtonProps {
 const Header = (props: HeaderProps) => {
   const [theme] = useCurrentTheme()
   const [userInfo, isLogin, tools] = useCurrentUser()
+  // const history = useHistory()
+  // if(isLogin) {
+  //   history.push("/account/" + userInfo.addr)
+  // }
 
   const SignInOutButton : FC<SignInOutButtonProps> = ({ user}) => {
     const signInOrOut = async (event: any) => {
@@ -25,6 +31,7 @@ const Header = (props: HeaderProps) => {
         fcl.unauthenticate()
       } else {
         fcl.authenticate()
+
       }
     }
   

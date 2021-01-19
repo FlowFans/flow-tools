@@ -1,6 +1,6 @@
 import {firstUpperCase} from '../../../utils'
 
-export const useQueryTemplate = (contractAddr: string, contractName:string) => {
+export const getQueryTemplate = (contractAddr: string, contractName:string) => {
     contractName = firstUpperCase(contractName)
     const getBalances = () => {
         const template = `

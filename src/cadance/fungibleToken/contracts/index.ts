@@ -1,14 +1,14 @@
 import { firstUpperCase } from '../../../utils'
 
 
-export const useTemplates = (contractName: string = 'Token') => {
+export const getTemplates = (contractName: string = 'Token') => {
 
     contractName = firstUpperCase(contractName)
 
     const fungibleTokenContractTemplate = () => {
 
         const template = `
-            import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
+            import FungibleToken from ${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
 
             pub contract ${contractName}: FungibleToken {
                 // TokensInitialized

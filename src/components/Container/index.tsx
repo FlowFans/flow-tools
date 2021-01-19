@@ -7,7 +7,7 @@ type ContainerProps = {
 
 const Container = ({children}: ContainerProps) => {
   return (
-    <Box >
+    <Box p={4}>
       {children}
     </Box>
   );
