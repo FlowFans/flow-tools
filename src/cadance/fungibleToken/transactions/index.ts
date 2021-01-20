@@ -1,12 +1,12 @@
 
 import {firstUpperCase} from '../../../utils'
 
-export const useTransactions = (contractAddr: string, contractName:string) => {
+export const getTransactions = (contractAddr: string, contractName:string) => {
     contractName = firstUpperCase(contractName)
 
     const mintToken = () => {
         const trx = `
-            import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
+            import FungibleToken from ${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
             import ${contractName} from ${contractAddr}
 
             transaction(recipient: Address, amount: UFix64) {
@@ -39,7 +39,7 @@ export const useTransactions = (contractAddr: string, contractName:string) => {
 
     const setupAccount = () => {
         const trx = `
-            import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
+            import FungibleToken from ${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
             import ${contractName} from ${contractAddr}
 
             transaction {
@@ -73,7 +73,7 @@ export const useTransactions = (contractAddr: string, contractName:string) => {
 
     const transfer = () => {
         const trx = `
-            import FungibleToken from 0x${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
+            import FungibleToken from ${process.env.REACT_APP_FUNGIBLE_TOKEN_ADDRESS}
             import ${contractName} from ${contractAddr}
 
             transaction(amount: UFix64, to: Address) {

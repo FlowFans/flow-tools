@@ -19,7 +19,7 @@ export interface Key{
     sequenceNumber: number
 }
 export interface Account {
-    addr: string
+    address: string
     balance: number
     code: string
     contracts?: any
@@ -34,6 +34,16 @@ export type TxOpts = {
     onSuccess?: Function
     onError?: Function
     onComplete?: Function
+}
+
+export type toastStatus = "success" | "info" | "warning" | "error" | undefined
+
+export interface ToastProps {
+    title?: string
+    desc: string
+    status?:toastStatus
+    duration?: number
+    isClosable?:boolean
 }
 
 // export interface TX any[]

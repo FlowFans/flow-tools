@@ -1,10 +1,32 @@
 import * as fcl from "@onflow/fcl"
 import { TxOpts } from '../constants/types'
+import { createStandaloneToast } from "@chakra-ui/react"
+
+import {ToastProps} from '../constants/types'
+
+const toastStandalone = createStandaloneToast()
 
 export const firstUpperCase = (str: string) => {
     return str.replace(/\b(\w)(\w*)/g, function($0, $1, $2) {
         return $1.toUpperCase() + $2.toLowerCase();
     })
+}
+
+const isFungibleTokenContract = (code: string) => {
+  const tokens = [': FungibleToken {', 'VaultStoragePath: Path', 'deposit(from: @FungibleToken.Vault) {', 'withdraw(amount: UFix64): @FungibleToken.Vault {']
+  let indexSum = 0
+  tokens.map(t=>{
+    const idx = code.indexOf(t)
+    indexSum += idx
+  })
+  return indexSum > 0
+}
+export const contractCodeType = (code: string):string => {
+  let type= "none"
+  if(isFungibleTokenContract(code)){
+    type = 'FT'
+  }
+  return type
 }
 
 
@@ -48,4 +70,16 @@ export async function tx(mods:any[] = [], opts:TxOpts) {
 
 function fvsTx(env: string, txId: string): string {
   return `https://flow-view-source.com/${env}/tx/${txId}`
+}
+
+
+export const toast = ({title = 'Tips', desc = '', status="success", duration= 9000, isClosable = true}:ToastProps) => {
+  toastStandalone({
+    position:'bottom-right',
+    title,
+    description: desc,
+    status,
+    duration,
+    isClosable
+  })
 }

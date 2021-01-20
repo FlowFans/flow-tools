@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory, RouteComponentProps } from "react-router-dom";
 
 import Cont from "../../components/Container";
-
+import {Avatar} from '@chakra-ui/react'
 
 export default function Account(
   props: RouteComponentProps<{ address: string }>
@@ -18,7 +18,6 @@ export default function Account(
   }
   return (
     <Cont>
-      
     </Cont>
   )
 }

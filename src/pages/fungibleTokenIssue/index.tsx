@@ -1,52 +1,71 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  Container,
   Box,
-  FormControl,
-  Input,
-  FormLabel,
-  FormErrorMessage,
-  Button,
-  FormHelperText,
+  Center
 } from "@chakra-ui/react";
+import { CloseIcon } from '@chakra-ui/icons'
 
 import Cont from "../../components/Container";
 import FungibleTokenForm from '../../components/FungibleTokenForm'
 import AccountInfo from '../../components/AccountInfo'
 import {SubmitFunc} from '../../constants/types'
 import {createFungibleToken} from '../../flow/createFungibleToken'
+import {useCurrentUser} from '../../hooks/useCurrentUser'
+import {useAccountInfo} from '../../hooks/useAccount'
+
+import {toast} from '../../utils'
 
 export default function FungibleTokenIssue() {
 
+  const [currentUser] = useCurrentUser()
+  const {addr} = currentUser
+  const {accountInfo, status, refresh} = useAccountInfo(addr)
+  const [contractName, setContractName] = useState()
+  const [txInfo, setTx] = useState()
+  const [error, setError] = useState()
+  if(!accountInfo) return null
+
   const onSuccess = (status:any) => {
-    console.log(status, '===========')
+    toast({
+      title:`Contractdeplpoy success`,
+      desc:` ${contractName} deployed in Tx ${txInfo}`
+    })
+    refresh()
   }
 
   const onError = (error:any) => {
-    console.log(error, '===========')
+    setError(error)
+    toast({
+      title:'Contract deploy error',
+      desc:'trx error',
+      status:'error'
+    })
   }
 
 
   const handleSubmit:SubmitFunc = async (values, actions) => {
     actions.setSubmitting(true)
-    console.log(values)
     const {contractName} = values
+    setContractName(contractName)
     const tx = await createFungibleToken(contractName, {onSuccess, onError})
-    console.log(tx)
+    setTx(tx)
     actions.setSubmitting(false)
     actions.resetForm()
   }
 
   return (
     <Cont>
-      <Container maxW='xl' centerContent>
-        <Box p={4}>
+        <Box w="100%">
           <FungibleTokenForm onSubmit={handleSubmit}/>
         </Box>
-        <Box p={4}>
-          <AccountInfo />
+
+        {error && <Center w="100%"  bg="tomato" h="100px">
+          {error}
+        </Center>}
+        
+        <Box w="100%">
+          <AccountInfo accountInfo={accountInfo} />
         </Box>
-      </Container>
     </Cont>
   );
 }

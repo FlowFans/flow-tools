@@ -17,7 +17,7 @@ export const $status = atomFamily({
   default: IDLE,
 });
 
-export function useAccountInfo(address: string) {
+export const useAccountInfo = (address: string) => {
   const [accountInfo, setAccountInfo] = useRecoilState($state(address));
   const [status, setStatus] = useRecoilState($status(address));
 

@@ -14,6 +14,8 @@ export const IDLE_DELAY = 1000;
 
 export const NOOP = () => {};
 
+export const MULTIAVATAR_URL = "https://api.multiavatar.com/";
+
 // export const DEFAULT_TX_OPTS = {
 //   onStart: NOOP,
 //   onSubmission: NOOP,
@@ -22,3 +24,9 @@ export const NOOP = () => {};
 //   onError: (error: string) => {},
 //   onComplete: NOOP,
 // };
+
+export const colorType: { [key: string]: string } = {
+  FT: "purple",
+  NFT: "orange",
+  Other: "gray",
+};

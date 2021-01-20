@@ -15,10 +15,16 @@ const tools = {
   changeUser: fcl.reauthenticate,
 }
 
-export function useCurrentUser():[UserInfo, boolean, any ] {
+export const useCurrentUser = ():[UserInfo, boolean, any ] => {
   const [user, setUser] = useRecoilState(currentUser)
   useEffect(() => fcl.currentUser().subscribe(setUser), [setUser])
   return [user, user.addr != null, tools]
 }
 
+
+export const useCurrentUserAddr = ():string => {
+  const [user] = useRecoilState(currentUser)
+  if(!user.loggedIn) return ''
+  return user.addr
+}
 
