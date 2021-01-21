@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 
 import {
-  Box, Flex, Avatar, Stat,
+  Box, Flex, Stat,
   StatNumber,
   StatHelpText,
 } from "@chakra-ui/react";
-import { MULTIAVATAR_URL } from "../../constants";
 import { Account } from "../../constants/types";
 
 import Contracts from "../Contracts";
@@ -13,6 +12,7 @@ import { useClipboard } from "@chakra-ui/react"
 import { CopyIcon } from '@chakra-ui/icons'
 
 import {toast} from '../../utils'
+import Avatar from '../Avatar'
 
 type AccountInfoProps = {
   accountInfo: Account;
@@ -35,7 +35,7 @@ const AccountInfo = (props: AccountInfoProps) => {
   return (
     <Box p={4} >
       <Flex mb={4} >
-        <Avatar mr={2} name={address} size="lg" src={MULTIAVATAR_URL + address + ".svg"} showBorder />
+        <Avatar address={address} />
         <Stat>
           <StatNumber>{balance} Flow</StatNumber>
           <StatHelpText style={{ cursor: 'pointer' }} onClick={onCopy}>{address}   <CopyIcon  w={5} h={5} /></StatHelpText>

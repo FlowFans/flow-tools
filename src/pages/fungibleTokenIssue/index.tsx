@@ -8,7 +8,7 @@ import { CloseIcon } from '@chakra-ui/icons'
 import Cont from "../../components/Container";
 import FungibleTokenForm from '../../components/FungibleTokenForm'
 import AccountInfo from '../../components/AccountInfo'
-import {SubmitFunc} from '../../constants/types'
+import {SubmitFuncType} from '../../constants/types'
 import {createFungibleToken} from '../../flow/createFungibleToken'
 import {useCurrentUser} from '../../hooks/useCurrentUser'
 import {useAccountInfo} from '../../hooks/useAccount'
@@ -43,7 +43,7 @@ export default function FungibleTokenIssue() {
   }
 
 
-  const handleSubmit:SubmitFunc = async (values, actions) => {
+  const handleSubmit:SubmitFuncType = async (values, actions) => {
     actions.setSubmitting(true)
     const {contractName} = values
     setContractName(contractName)

@@ -5,7 +5,7 @@ export interface UserInfo {
 
 }
 
-export interface SubmitFunc {
+export interface SubmitFuncType {
     (values: any, actions: any): void;
   }
 

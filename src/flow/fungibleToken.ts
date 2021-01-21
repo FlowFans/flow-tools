@@ -44,7 +44,7 @@ export const getTotalSupply = (address: string, contractName: string) => {
   ]).then(decode)
 }
 
-export function fetchTokenBalance(address: string, contractName: string, queryAddress?: string) {
+export function getBalance(address: string, contractName: string, queryAddress?: string) {
   if (address == null) return Promise.resolve(false)
   const {getBalances} = getQueryTemplate(address, contractName)
   // prettier-ignore

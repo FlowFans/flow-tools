@@ -32,6 +32,10 @@ export const useAccountInfo = (address: string) => {
   };
 }
 
+export const useCurrentContractInfo = () => {
+  
+}
+
 // export const accountInfo = atom({
 //     key: "USER_INFO",
 //     default:{

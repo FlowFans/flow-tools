@@ -1,38 +1,42 @@
 import * as fcl from "@onflow/fcl"
-import { TxOpts } from '../constants/types'
+import { TxOpts } from "../constants/types"
 import { createStandaloneToast } from "@chakra-ui/react"
 
-import {ToastProps} from '../constants/types'
+import { ToastProps } from "../constants/types"
 
 const toastStandalone = createStandaloneToast()
 
 export const firstUpperCase = (str: string) => {
-    return str.replace(/\b(\w)(\w*)/g, function($0, $1, $2) {
-        return $1.toUpperCase() + $2.toLowerCase();
-    })
+  return str.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
+    return $1.toUpperCase() + $2.toLowerCase()
+  })
 }
 
 const isFungibleTokenContract = (code: string) => {
-  const tokens = [': FungibleToken {', 'VaultStoragePath: Path', 'deposit(from: @FungibleToken.Vault) {', 'withdraw(amount: UFix64): @FungibleToken.Vault {']
+  const tokens = [
+    ": FungibleToken {",
+    "VaultStoragePath: Path",
+    "deposit(from: @FungibleToken.Vault) {",
+    "withdraw(amount: UFix64): @FungibleToken.Vault {",
+  ]
   let indexSum = 0
-  tokens.map(t=>{
+  tokens.map((t) => {
     const idx = code.indexOf(t)
     indexSum += idx
   })
   return indexSum > 0
 }
-export const contractCodeType = (code: string):string => {
-  let type= "none"
-  if(isFungibleTokenContract(code)){
-    type = 'FT'
+export const contractCodeType = (code: string): string => {
+  let type = "none"
+  if (isFungibleTokenContract(code)) {
+    type = "FT"
   }
   return type
 }
 
-
 const noop = async () => {}
 
-export async function tx(mods:any[] = [], opts:TxOpts) {
+export async function tx(mods: any[] = [], opts: TxOpts) {
   const onStart = opts.onStart || noop
   const onSubmission = opts.onSubmission || noop
   const onUpdate = opts.onUpdate || noop
@@ -45,7 +49,7 @@ export async function tx(mods:any[] = [], opts:TxOpts) {
     var txId = await fcl.send(mods).then(fcl.decode)
     console.info(
       `%cTX[${txId}]: ${fvsTx(await fcl.config().get("env"), txId)}`,
-      "color:purple;font-weight:bold;font-family:monospace;"
+      "color:purplefont-weight:boldfont-family:monospace"
     )
     onSubmission(txId)
     var unsub = await fcl.tx(txId).subscribe(onUpdate)
@@ -53,7 +57,7 @@ export async function tx(mods:any[] = [], opts:TxOpts) {
     unsub()
     console.info(
       `%cTX[${txId}]: ${fvsTx(await fcl.config().get("env"), txId)}`,
-      "color:green;font-weight:bold;font-family:monospace;"
+      "color:greenfont-weight:boldfont-family:monospace"
     )
     await onSuccess(txStatus)
     return txStatus
@@ -72,14 +76,21 @@ function fvsTx(env: string, txId: string): string {
   return `https://flow-view-source.com/${env}/tx/${txId}`
 }
 
-
-export const toast = ({title = 'Tips', desc = '', status="success", duration= 9000, isClosable = true}:ToastProps) => {
+export const toast = ({
+  title = "Tips",
+  desc = "",
+  status = "success",
+  duration = 9000,
+  isClosable = true,
+}: ToastProps) => {
   toastStandalone({
-    position:'bottom-right',
+    position: "bottom-right",
     title,
     description: desc,
     status,
     duration,
-    isClosable
+    isClosable,
   })
 }
+
+

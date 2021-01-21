@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory, RouteComponentProps } from "react-router-dom";
 
 import Cont from "../../components/Container";
-import {Avatar} from '@chakra-ui/react'
+import {useAccountInfo}from '../../hooks/useAccount'
+import AccountInfo from '../../components/AccountInfo'
 
 export default function Account(
   props: RouteComponentProps<{ address: string }>
@@ -16,8 +17,11 @@ export default function Account(
   if (!address) {
     history.push(`/`);
   }
+  const {accountInfo, status, refresh} = useAccountInfo(address)
+
   return (
     <Cont>
+      <AccountInfo accountInfo={accountInfo}/>
     </Cont>
   )
 }

@@ -9,16 +9,16 @@ import {
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
-  IconButton,
   Text,
-  Flex
+  Flex,
+  useColorMode
 } from "@chakra-ui/react";
 
 import { SearchIcon } from '@chakra-ui/icons'
 import { useHistory } from "react-router-dom";
 
 
-import { useCurrentTheme } from '../../hooks/useCurrentTheme'
+
 import "ace-builds/src-noconflict/mode-golang"
 import "ace-builds/src-noconflict/theme-solarized_dark"
 import "ace-builds/src-noconflict/theme-solarized_light"
@@ -34,8 +34,7 @@ type ContractsProps = {
 const ContractsInfo = (props: ContractsProps) => {
   const { contracts = {}, userAddress } = props;
   const contractNames = Object.keys(contracts);
-  const [currentTheme] = useCurrentTheme()
-  const editorTheme = `solarized_${currentTheme}`
+  
   const history = useHistory()
 
   return (
@@ -57,22 +56,7 @@ const ContractsInfo = (props: ContractsProps) => {
                 <AccordionIcon />
               </AccordionButton>
               <AccordionPanel p={4}>
-                <AceEditor
-                  mode="golang"
-                  width="100%"
-                  height="600px"
-                  theme={editorTheme}
-                  value={code}
-                  readOnly={true}
-                  fontSize={14}
-                  showPrintMargin={true}
-                  showGutter={true}
-                  highlightActiveLine={true}
-                  setOptions={{
-                    showLineNumbers: true,
-                    tabSize: 2,
-                  }}
-                />
+                <ContractCode code={code} />
               </AccordionPanel>
             </AccordionItem>
           )
@@ -82,5 +66,26 @@ const ContractsInfo = (props: ContractsProps) => {
     </Box>
   );
 };
+
+export const ContractCode = ({code = '', height='600px'})=>{
+  const {colorMode} = useColorMode()
+  const editorTheme = `solarized_${colorMode}`
+  return (<AceEditor
+  mode="golang"
+  width="100%"
+  height={height}
+  theme={editorTheme}
+  value={code}
+  readOnly={true}
+  fontSize={14}
+  showPrintMargin={true}
+  showGutter={true}
+  highlightActiveLine={true}
+  setOptions={{
+    showLineNumbers: true,
+    tabSize: 2,
+  }}
+/>)
+}
 
 export default ContractsInfo;

@@ -9,10 +9,10 @@ import {
     InputControl,
     SubmitButton
   } from "formik-chakra-ui";
-import {SubmitFunc} from '../../constants/types'
+import {SubmitFuncType} from '../../constants/types'
 
 interface FormProps {
-    onSubmit:SubmitFunc
+    onSubmit:SubmitFuncType
 }
 
 interface FormValues {
