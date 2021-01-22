@@ -43,12 +43,14 @@ export async function tx(mods: any[] = [], opts: TxOpts) {
   const onSuccess = opts.onSuccess || noop
   const onError = opts.onError || noop
   const onComplete = opts.onComplete || noop
-
+  const env = await fcl.config().get("env")
+  const txLink = (txId='') => fvsTx(env, txId)
   try {
     onStart()
     var txId = await fcl.send(mods).then(fcl.decode)
+
     console.info(
-      `%cTX[${txId}]: ${fvsTx(await fcl.config().get("env"), txId)}`,
+      `%cTX[${txId}]: ${txLink(txId)}`,
       "color:purplefont-weight:boldfont-family:monospace"
     )
     onSubmission(txId)
@@ -56,23 +58,24 @@ export async function tx(mods: any[] = [], opts: TxOpts) {
     var txStatus = await fcl.tx(txId).onceSealed()
     unsub()
     console.info(
-      `%cTX[${txId}]: ${fvsTx(await fcl.config().get("env"), txId)}`,
+      `%cTX[${txId}]: ${txLink(txId)}`,
       "color:greenfont-weight:boldfont-family:monospace"
     )
-    await onSuccess(txStatus)
+    await onSuccess(txStatus, txLink(txId))
     return txStatus
   } catch (error) {
+    
     console.error(
-      `TX[${txId}]: ${fvsTx(await fcl.config().get("env"), txId)}`,
+      `TX[${txId}]: ${txLink(txId)}`,
       error
     )
-    onError(error)
+    onError(error, txLink(txId))
   } finally {
     await onComplete()
   }
 }
 
-function fvsTx(env: string, txId: string): string {
+export const fvsTx = (env: string, txId: string): string => {
   return `https://flow-view-source.com/${env}/tx/${txId}`
 }
 

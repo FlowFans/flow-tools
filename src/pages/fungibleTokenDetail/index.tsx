@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, RouteComponentProps } from "react-router-dom";
-import { Box, Button, Center, Divider, VStack, HStack, Text, Link, Tag } from "@chakra-ui/react"
+import { Box, Button, Center, Divider, VStack, HStack, Text, Link, Tag, useDisclosure } from "@chakra-ui/react"
 
 import Container from "../../components/Container";
 import { setupAccountWithToken, isAccountSetup, getBalance } from '../../flow/fungibleToken'
@@ -10,8 +10,10 @@ import { ContractCode } from '../../components/Contracts'
 import { ContractStats } from '../../components/Contracts/ContractStats'
 import Avatar from '../../components/Avatar'
 import { contractCodeType } from '../../utils'
-
 import { RepeatIcon } from '@chakra-ui/icons'
+
+import MintFTModal from '../../components/Modals/MintFTModal'
+import TransferFTModal from '../../components/Modals/TransferFTModal'
 
 export default function FungibleTokenDetail(
   props: RouteComponentProps<{ contractAddress: string; contractName: string }>
@@ -27,15 +29,47 @@ export default function FungibleTokenDetail(
   }
 
   const currentUserAddr = useCurrentUserAddr()
-  const { accountInfo } = useAccountInfo(contractAddress)
+  const { accountInfo, refresh } = useAccountInfo(contractAddress)
   const code = accountInfo.contracts[contractName]
   const [hasSetup, setSetupState] = useState(false)
   const [balance, setBalance] = useState(0)
   const [loading, setLoading] = useState(false)
   const contractType = contractCodeType(code)
 
-  const isAdmin = currentUserAddr == contractAddress
+  const isAdmin = currentUserAddr === contractAddress
 
+
+  const setupAccount = async () => {
+    setLoading(true)
+    const res = await setupAccountWithToken(contractAddress, contractName, currentUserAddr)
+    setLoading(false)
+    console.log(res, 'set result')
+  }
+
+  const queryBalance = async () => {
+    console.log('--------query inner----------', currentUserAddr)
+    const balance = await getBalance(contractAddress, contractName, currentUserAddr)
+    setBalance(balance)
+    return balance
+  }
+
+  // refresh balance for modal
+  const modalCallback = hasSetup ? queryBalance : ()=>{}
+  const MintProps = {
+    ...useDisclosure(),
+    contractAddress,
+    contractName,
+    cb:()=>modalCallback()
+  }
+
+  const TransProps = {
+    ...useDisclosure(),
+    contractAddress,
+    contractName,
+    cb:()=>modalCallback()
+  }
+  
+  
   useEffect(() => {
     const querySetupInfo = async () => {
       const res = await isAccountSetup(contractAddress, contractName, currentUserAddr)
@@ -48,22 +82,12 @@ export default function FungibleTokenDetail(
     querySetupInfo()
   }, [contractAddress, contractName, currentUserAddr, hasSetup, loading])
 
-  const setupAccount = async () => {
-    setLoading(true)
-    const res = await setupAccountWithToken(contractAddress, contractName, currentUserAddr)
-    setLoading(false)
-    console.log(res, 'set result')
-  }
-
-  const queryBalance = async () => {
-    const balance = await getBalance(contractAddress, contractName, currentUserAddr)
-    setBalance(balance)
-  }
+ 
 
   return <Container>
-    <Center p={4} spacing="24px">
+    <Center p={4} spacing="24px" >
       {hasSetup ?
-        <VStack w="100%" p={8} spacing="24px" shadow="md">
+        <VStack w="100%" p={8} shadow="md">
           <Avatar address={currentUserAddr} />
           <Text>
             addr: <Link onClick={() => history.push(`/account/${currentUserAddr}`)}>{currentUserAddr}</Link>{isAdmin && <Tag colorScheme='orange'>Admin</Tag>}
@@ -72,20 +96,20 @@ export default function FungibleTokenDetail(
             balance: {balance} <Text as='kbd' fontWeight={500}>{contractName}<RepeatIcon onClick={() => queryBalance()} /></Text>
           </Text>
         </VStack> :
-        <VStack height="50px" spacing="24px" >
+        <VStack height="50px" spacing="24px" mb={8}>
           <Text>
             you need to set up your contract to receive and query your token
           </Text>
-          <Button size="lg" isLoading={loading} onClick={setupAccount}>Setup Account with {contractAddress}/{contractName}</Button>
+          <Button w='140px' colorScheme='teal' isLoading={loading} onClick={setupAccount}>Setup Account</Button>
         </VStack>
       }
     </Center>
-    {contractType == 'FT' &&
+    {contractType === 'FT' && hasSetup &&
       <HStack flex='1' justifyContent="center">
-        {isAdmin && <Button colorScheme="green"  >
+        {isAdmin && <Button colorScheme="green" onClick={()=> MintProps.onOpen()}  >
           Mint
         </Button>}
-        <Button colorScheme="teal">
+        <Button colorScheme="teal" onClick={()=> TransProps.onOpen()}>
           Send
         </Button>
         <Button colorScheme="blue">
@@ -99,7 +123,8 @@ export default function FungibleTokenDetail(
       <ContractStats />
       <ContractCode code={code} height="800px" />
     </Box>
-
+    <MintFTModal {...MintProps}/>
+    <TransferFTModal {...TransProps}/>
   </Container>
 }
 

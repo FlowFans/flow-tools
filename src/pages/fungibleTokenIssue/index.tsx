@@ -21,14 +21,13 @@ export default function FungibleTokenIssue() {
   const {addr} = currentUser
   const {accountInfo, status, refresh} = useAccountInfo(addr)
   const [contractName, setContractName] = useState()
-  const [txInfo, setTx] = useState()
   const [error, setError] = useState()
   if(!accountInfo) return null
 
-  const onSuccess = (status:any) => {
+  const onSuccess = (status:any, txId:string) => {
     toast({
       title:`Contractdeplpoy success`,
-      desc:` ${contractName} deployed in Tx ${txInfo}`
+      desc:` ${contractName} deployed in Tx ${txId}`
     })
     refresh()
   }
@@ -48,7 +47,6 @@ export default function FungibleTokenIssue() {
     const {contractName} = values
     setContractName(contractName)
     const tx = await createFungibleToken(contractName, {onSuccess, onError})
-    setTx(tx)
     actions.setSubmitting(false)
     actions.resetForm()
   }

@@ -105,6 +105,7 @@ export const getTransactions = (contractAddr: string, contractName:string) => {
                 }
             }
         `
+        return trx
     }
 
     return {

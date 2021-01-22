@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 export interface UserInfo {
     loggedIn: boolean
     addr:string
@@ -40,7 +42,7 @@ export type toastStatus = "success" | "info" | "warning" | "error" | undefined
 
 export interface ToastProps {
     title?: string
-    desc: string
+    desc: string | ReactNode
     status?:toastStatus
     duration?: number
     isClosable?:boolean
