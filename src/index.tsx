@@ -10,7 +10,6 @@ import { App } from "./pages/App"
 import reportWebVitals from "./reportWebVitals"
 import * as serviceWorker from "./serviceWorker"
 import {RecoilRoot} from "recoil"
-import theme from './themes'
 import './i18n'
 
 
