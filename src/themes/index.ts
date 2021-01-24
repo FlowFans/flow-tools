@@ -35,6 +35,7 @@ const overrides = {
   // colorMode config
   config: {
     useSystemColorMode: false,
+    initialColorMode: "light",
   },
   styles,
   borders,

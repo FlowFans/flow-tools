@@ -3,11 +3,12 @@ import { Route, Switch } from 'react-router-dom'
 import {
   ChakraProvider,
   Box,
+  useColorMode
 } from "@chakra-ui/react"
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 import '../config'
 import theme from '../themes'
-import {useCurrentTheme} from '../hooks/useCurrentTheme'
+
 
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -23,9 +24,9 @@ import Account from './account'
 
 export const App = () => {
 
-  const [currTheme] = useCurrentTheme()
-  const color = `text.${currTheme}`
-  const background = `background.${currTheme}`
+  const {colorMode} = useColorMode()
+  const color = `text.${colorMode}`
+  const background = `background.${colorMode}`
   return (
   <Suspense fallback={null}>
     <Route component={GoogleAnalyticsReporter} />

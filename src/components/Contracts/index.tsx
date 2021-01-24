@@ -24,7 +24,7 @@ import "ace-builds/src-noconflict/theme-solarized_dark"
 import "ace-builds/src-noconflict/theme-solarized_light"
 
 import { contractCodeType } from '../../utils'
-import {COLOR_TYPE} from '../../constants'
+import { COLOR_TYPE } from '../../constants'
 
 type ContractsProps = {
   contracts: any;
@@ -34,7 +34,7 @@ type ContractsProps = {
 const ContractsInfo = (props: ContractsProps) => {
   const { contracts = {}, userAddress } = props;
   const contractNames = Object.keys(contracts);
-  
+
   const history = useHistory()
 
   return (
@@ -42,7 +42,7 @@ const ContractsInfo = (props: ContractsProps) => {
       <Accordion allowMultiple>
         {contractNames.map((name, idx) => {
           const code = contracts[name]
-          const contractType:string = contractCodeType(code)
+          const contractType: string = contractCodeType(code)
           const color = COLOR_TYPE[contractType]
           return (
             <AccordionItem key={idx}>
@@ -51,7 +51,7 @@ const ContractsInfo = (props: ContractsProps) => {
                   <Text fontWeight="bold">{name} </Text><Badge ml={2} colorScheme={color}>{contractType}</Badge>
                 </Flex>
                 <Box flex='1' textAlign='right' mr={2} >
-                  <SearchIcon color='teal' onClick={()=>history.push(`/ft/${userAddress}/${name}`)} />
+                  <SearchIcon color='teal' onClick={() => history.push(`/ft/${userAddress}/${name}`)} />
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
@@ -67,25 +67,25 @@ const ContractsInfo = (props: ContractsProps) => {
   );
 };
 
-export const ContractCode = ({code = '', height='600px'})=>{
-  const {colorMode} = useColorMode()
+export const ContractCode = ({ code = '', height = '600px' }) => {
+  const { colorMode } = useColorMode()
   const editorTheme = `solarized_${colorMode}`
   return (<AceEditor
-  mode="golang"
-  width="100%"
-  height={height}
-  theme={editorTheme}
-  value={code}
-  readOnly={true}
-  fontSize={14}
-  showPrintMargin={true}
-  showGutter={true}
-  highlightActiveLine={true}
-  setOptions={{
-    showLineNumbers: true,
-    tabSize: 2,
-  }}
-/>)
+    mode="golang"
+    width="100%"
+    height={height}
+    theme={editorTheme}
+    value={code}
+    readOnly={true}
+    fontSize={14}
+    showPrintMargin={true}
+    showGutter={true}
+    highlightActiveLine={true}
+    setOptions={{
+      showLineNumbers: true,
+      tabSize: 2,
+    }}
+  />)
 }
 
 export default ContractsInfo;

@@ -1,16 +1,16 @@
-import * as fcl from "@onflow/fcl"
-import { TxOpts } from "../constants/types"
-import { createStandaloneToast } from "@chakra-ui/react"
+import * as fcl from "@onflow/fcl";
+import { TxOpts } from "../constants/types";
+import { createStandaloneToast } from "@chakra-ui/react";
 
-import { ToastProps } from "../constants/types"
+import { ToastProps } from "../constants/types";
 
-const toastStandalone = createStandaloneToast()
+const toastStandalone = createStandaloneToast();
 
 export const firstUpperCase = (str: string) => {
   return str.replace(/\b(\w)(\w*)/g, function ($0, $1, $2) {
-    return $1.toUpperCase() + $2.toLowerCase()
-  })
-}
+    return $1.toUpperCase() + $2.toLowerCase();
+  });
+};
 
 const isFungibleTokenContract = (code: string) => {
   const tokens = [
@@ -18,66 +18,62 @@ const isFungibleTokenContract = (code: string) => {
     "VaultStoragePath: Path",
     "deposit(from: @FungibleToken.Vault) {",
     "withdraw(amount: UFix64): @FungibleToken.Vault {",
-  ]
-  let indexSum = 0
+  ];
+  let indexSum = 0;
   tokens.map((t) => {
-    const idx = code.indexOf(t)
-    indexSum += idx
-  })
-  return indexSum > 0
-}
+    const idx = code.indexOf(t);
+    indexSum += idx;
+  });
+  return indexSum > 0;
+};
 export const contractCodeType = (code: string): string => {
-  let type = "none"
+  let type = "none";
   if (isFungibleTokenContract(code)) {
-    type = "FT"
+    type = "FT";
   }
-  return type
-}
+  return type;
+};
 
-const noop = async () => {}
+const noop = async () => {};
 
 export async function tx(mods: any[] = [], opts: TxOpts) {
-  const onStart = opts.onStart || noop
-  const onSubmission = opts.onSubmission || noop
-  const onUpdate = opts.onUpdate || noop
-  const onSuccess = opts.onSuccess || noop
-  const onError = opts.onError || noop
-  const onComplete = opts.onComplete || noop
-  const env = await fcl.config().get("env")
-  const txLink = (txId='') => fvsTx(env, txId)
+  const onStart = opts.onStart || noop;
+  const onSubmission = opts.onSubmission || noop;
+  const onUpdate = opts.onUpdate || noop;
+  const onSuccess = opts.onSuccess || noop;
+  const onError = opts.onError || noop;
+  const onComplete = opts.onComplete || noop;
+  const env = await fcl.config().get("env");
+  const txLink = (txId = "") => fvsTx(env, txId);
   try {
-    onStart()
-    var txId = await fcl.send(mods).then(fcl.decode)
+    onStart();
+    var txId = await fcl.send(mods).then(fcl.decode);
 
     console.info(
       `%cTX[${txId}]: ${txLink(txId)}`,
       "color:purplefont-weight:boldfont-family:monospace"
-    )
-    onSubmission(txId)
-    var unsub = await fcl.tx(txId).subscribe(onUpdate)
-    var txStatus = await fcl.tx(txId).onceSealed()
-    unsub()
+    );
+    onSubmission(txId);
+    var unsub = await fcl.tx(txId).subscribe(onUpdate);
+    var txStatus = await fcl.tx(txId).onceSealed();
+    unsub();
     console.info(
       `%cTX[${txId}]: ${txLink(txId)}`,
       "color:greenfont-weight:boldfont-family:monospace"
-    )
-    await onSuccess(txStatus, txLink(txId))
-    return txStatus
+    );
+    await onSuccess(txStatus, txLink(txId));
+    return txStatus;
   } catch (error) {
-    
-    console.error(
-      `TX[${txId}]: ${txLink(txId)}`,
-      error
-    )
-    onError(error, txLink(txId))
+    console.error(`TX[${txId}]: ${txLink(txId)}`, error);
+    onError(error, txLink(txId));
   } finally {
-    await onComplete()
+    await onComplete();
   }
 }
 
 export const fvsTx = (env: string, txId: string): string => {
-  return `https://flow-view-source.com/${env}/tx/${txId}`
-}
+  return `https://flow-view-source.com/${env}/tx/${txId}`;
+};
 
 export const toast = ({
   title = "Tips",
@@ -93,7 +89,10 @@ export const toast = ({
     status,
     duration,
     isClosable,
-  })
-}
+  });
+};
 
-
+export const fmtFlow = (balance: number) => {
+  if (balance == null) return null;
+  return String(Number(balance) / 100000000);
+};
