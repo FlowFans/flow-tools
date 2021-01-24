@@ -8,6 +8,7 @@ import { CloseIcon } from '@chakra-ui/icons'
 import Cont from "../../components/Container";
 import FungibleTokenForm from '../../components/FungibleTokenForm'
 import AccountInfo from '../../components/AccountInfo'
+import LoginTip from '../../components/LoginTip'
 import {SubmitFuncType} from '../../constants/types'
 import {createFungibleToken} from '../../flow/createFungibleToken'
 import {useCurrentUser} from '../../hooks/useCurrentUser'
@@ -22,7 +23,7 @@ export default function FungibleTokenIssue() {
   const {accountInfo, status, refresh} = useAccountInfo(addr)
   const [contractName, setContractName] = useState()
   const [error, setError] = useState()
-  if(!accountInfo) return null
+  if(!accountInfo) return <Cont><LoginTip /></Cont>
 
   const onSuccess = (status:any, txId:string) => {
     toast({
