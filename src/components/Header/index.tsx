@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import * as fcl from "@onflow/fcl"
+import {useHistory} from 'react-router-dom'
 
 import { Box, Flex, Spacer, Button, useColorMode, Text } from "@chakra-ui/react";
 // import {useHistory} from "react-router-dom"
@@ -17,7 +18,7 @@ interface SignInOutButtonProps {
 const Header = (props: HeaderProps) => {
   const { colorMode } = useColorMode()
   const [userInfo, isLogin, tools] = useCurrentUser()
-  // const history = useHistory()
+  const history = useHistory()
   // if(isLogin) {
   //   history.push("/account/" + userInfo.addr)
   // }
@@ -47,7 +48,7 @@ const Header = (props: HeaderProps) => {
     <>
       <Flex borderBottom='1px' borderBottomColor={`border.${colorMode}`} >
         <Box p='2'>
-          <Text fontWeight={600} fontSize="2xl">Flow Tools</Text>
+          <Text fontWeight={600} fontSize="2xl" onClick={()=>history.push('/')}>Flow Tools</Text>
       </Box>
         <Spacer />
         <Spacer />
