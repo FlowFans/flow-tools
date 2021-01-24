@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   Box,
-  Center
+  Center,
 } from "@chakra-ui/react";
 import { CloseIcon } from '@chakra-ui/icons'
 
@@ -57,8 +57,9 @@ export default function FungibleTokenIssue() {
           <FungibleTokenForm onSubmit={handleSubmit}/>
         </Box>
 
-        {error && <Center w="100%"  bg="tomato" h="100px">
+        {error && <Center pos="relative" w="100%"  bg="tomato" h="100px" borderRadius="md" >
           {error}
+          <CloseIcon h={2} w={2} pos="absolute" top={4} right={4} onClick={()=> setError(undefined)} />
         </Center>}
         
         <Box w="100%">

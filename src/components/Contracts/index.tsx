@@ -24,7 +24,7 @@ import "ace-builds/src-noconflict/theme-solarized_dark"
 import "ace-builds/src-noconflict/theme-solarized_light"
 
 import { contractCodeType } from '../../utils'
-import {colorType} from '../../constants'
+import {COLOR_TYPE} from '../../constants'
 
 type ContractsProps = {
   contracts: any;
@@ -43,7 +43,7 @@ const ContractsInfo = (props: ContractsProps) => {
         {contractNames.map((name, idx) => {
           const code = contracts[name]
           const contractType:string = contractCodeType(code)
-          const color = colorType[contractType]
+          const color = COLOR_TYPE[contractType]
           return (
             <AccordionItem key={idx}>
               <AccordionButton>

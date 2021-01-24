@@ -18,6 +18,7 @@ import Home from './home'
 import FungibleTokens from './fungibleTokens'
 import FungibleTokenDetail from './fungibleTokenDetail'
 import FungibleTokenIssue from './fungibleTokenIssue'
+import FungibleTokenQuery from './fungibleTokenQuery'
 import Account from './account'
 
 export const App = () => {
@@ -37,6 +38,7 @@ export const App = () => {
               <Route exact strict path="/account/:address" component={Account} />
               <Route exact strict path="/ft" component={FungibleTokens} />
               <Route exact strict path="/ft/issue" component={FungibleTokenIssue} />
+              <Route exact strict path="/ft/query" component={FungibleTokenQuery} />
               <Route exact strict path="/ft/:contractAddress/:contractName" component={FungibleTokenDetail} />
               <Route exact strict  component={Home} />
         </Switch>

@@ -4,6 +4,7 @@ import {
   Box, Flex, Stat,
   StatNumber,
   StatHelpText,
+  Divider
 } from "@chakra-ui/react";
 import { Account } from "../../constants/types";
 
@@ -41,6 +42,7 @@ const AccountInfo = (props: AccountInfoProps) => {
           <StatHelpText style={{ cursor: 'pointer' }} onClick={onCopy}>{address}   <CopyIcon  w={5} h={5} /></StatHelpText>
         </Stat>
       </Flex>
+      <Divider mt={4} mb={4} borderColor="gray"/>
       <Contracts contracts={contracts} userAddress={address}/>
     </Box>
   );
