@@ -13,8 +13,8 @@ import {
   Link
 } from "@chakra-ui/react"
 
-  
-import {ExternalLinkIcon} from '@chakra-ui/icons'
+
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 
 import { Formik } from "formik"
 import {
@@ -65,7 +65,7 @@ const MintFTModal = (props: MintModalProps) => {
       toast({
         title: `Token mint success`,
         // desc: `${contractName} mint in Tx ${txId}`
-        desc: (<Text>{contractName}  mint in <Link  href={txLink} isExternal>Tx<ExternalLinkIcon mx="2px" /></Link></Text>)
+        desc: (<Text>{contractName}  mint in <Link href={txLink} isExternal>tx<ExternalLinkIcon mx="2px" /></Link></Text>)
       })
       cb()
       onClose()

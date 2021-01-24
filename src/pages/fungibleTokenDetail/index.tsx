@@ -10,11 +10,12 @@ import { ContractCode } from '../../components/Contracts'
 import Avatar from '../../components/Avatar'
 import { contractCodeType } from '../../utils'
 import { RepeatIcon } from '@chakra-ui/icons'
-
 import { FT_PATHS } from '../../constants'
-
 import MintFTModal from '../../components/Modals/MintFTModal'
 import TransferFTModal from '../../components/Modals/TransferFTModal'
+import { toast } from '../../utils'
+import { ExternalLinkIcon } from '@chakra-ui/icons'
+
 
 export default function FungibleTokenDetail(
   props: RouteComponentProps<{ contractAddress: string; contractName: string }>
@@ -41,15 +42,30 @@ export default function FungibleTokenDetail(
   const isAdmin = currentUserAddr === contractAddress
 
 
+  const onSuccess = (status: any, txLink: string) => {
+    toast({
+      title: `Set up account success`,
+      // desc: `${contractName} mint in Tx ${txId}`
+      desc: (<Text>Set up {currentUserAddr}  of {contractName} in <Link href={txLink} isExternal>tx<ExternalLinkIcon mx="2px" /></Link></Text>)
+    })
+  }
+
+  const onError = (error: any) => {
+    toast({
+      title: 'Account setup error',
+      desc: error,
+      status: 'error'
+    })
+  }
+
   const setupAccount = async () => {
     setLoading(true)
-    const res = await setupAccountWithToken(contractAddress, contractName, currentUserAddr)
+    const res = await setupAccountWithToken(contractAddress, contractName, currentUserAddr, { onSuccess, onError })
     setLoading(false)
     console.log(res, 'set result')
   }
 
   const queryBalance = async () => {
-    console.log('--------query inner----------', currentUserAddr)
     const balance = await getBalance(contractAddress, contractName, currentUserAddr)
     setBalance(balance)
     return balance
