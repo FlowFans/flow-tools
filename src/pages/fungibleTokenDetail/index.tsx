@@ -15,7 +15,7 @@ import MintFTModal from '../../components/Modals/MintFTModal'
 import TransferFTModal from '../../components/Modals/TransferFTModal'
 import { toast } from '../../utils'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-
+import LoginTip from '../../components/LoginTip'
 
 export default function FungibleTokenDetail(
   props: RouteComponentProps<{ contractAddress: string; contractName: string }>
@@ -101,7 +101,8 @@ export default function FungibleTokenDetail(
     }
     querySetupInfo()
   }, [contractAddress, contractName, currentUserAddr, hasSetup, loading])
-
+  
+  if(!currentUserAddr) return <Cont><LoginTip /></Cont>
 
 
   return <Cont>
