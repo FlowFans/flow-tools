@@ -132,9 +132,9 @@ export default function FungibleTokenDetail(
         <Button colorScheme="teal" onClick={() => TransProps.onOpen()}>
           Send
         </Button>
-        <Button colorScheme="blue">
+        {/* <Button colorScheme="blue">
           Recieve
-        </Button>
+        </Button> */}
       </HStack>
     }
     <Divider h={8} />
