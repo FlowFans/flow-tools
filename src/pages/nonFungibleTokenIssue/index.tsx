@@ -12,7 +12,7 @@ import FungibleTokenForm from '../../components/FungibleTokenForm'
 import AccountInfo from '../../components/AccountInfo'
 import LoginTip from '../../components/LoginTip'
 import { SubmitFuncType } from '../../constants/types'
-import { createFungibleToken } from '../../flow/createTokens'
+import { createNonFungibleToken } from '../../flow/createTokens'
 import { useCurrentUser } from '../../hooks/useCurrentUser'
 import { useAccountInfo } from '../../hooks/useAccount'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
@@ -50,7 +50,7 @@ export default function FungibleTokenIssue() {
     actions.setSubmitting(true)
     const { contractName } = values
     setContractName(contractName)
-    const tx = await createFungibleToken(contractName, { onSuccess, onError })
+    const tx = await createNonFungibleToken(contractName, { onSuccess, onError })
     actions.setSubmitting(false)
     actions.resetForm()
   }

@@ -16,14 +16,16 @@ import { fetchAccount } from '../../flow/fetchFlowInfo'
 import { ADDR_REGEX } from '../../constants'
 import {toast} from '../../utils'
 
-type TokenQueryFormProps = {};
+type TokenQueryFormProps = {
+  type?:string
+};
 type FormValues = {
   contractAddress: string
   contractName: string
 }
 
 const TokenQueryForm = (props: TokenQueryFormProps) => {
-
+  const {type = 'ft'} = props
   const history = useHistory()
   const [contracts, setContracts] = useState([''])
   const [state, setstate] = useState()
@@ -68,7 +70,8 @@ const TokenQueryForm = (props: TokenQueryFormProps) => {
           // onSubmit(values, actions)
           // console.log(values, '=====')
           const {contractAddress, contractName} = values
-          history.push(`/ft/${contractAddress}/${contractName}`)
+
+          history.push(`/${type}/${contractAddress}/${contractName}`)
           actions.setSubmitting(false)
         }}
         validationSchema={validationSchema}

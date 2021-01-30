@@ -15,7 +15,7 @@ export default function Home() {
           borderRadius="md"
           mr={4}
           h={16}
-          p={4}
+          p={5}
           color='white'
           onClick={() => history.push("/ft")}
         >
@@ -26,14 +26,9 @@ export default function Home() {
           w='48%'
           borderRadius="md"
           h={16}
-          p={4}
+          p={5}
           color='white'
-          onClick={() =>
-            toast({
-              title: "Tip",
-              desc: "Comming soon",
-            })
-          }
+          onClick={() => history.push("/ft")}
         >
           NonFungbile Token
       </Box>
