@@ -15,7 +15,7 @@ export const firstUpperCase = (str: string) => {
 const isFungibleTokenContract = (code: string) => {
   const tokens = [
     ": FungibleToken {",
-    "VaultStoragePath: Path",
+    "VaultStoragePath: StoragePath",
     "deposit(from: @FungibleToken.Vault) {",
     "withdraw(amount: UFix64): @FungibleToken.Vault {",
   ];
@@ -96,3 +96,15 @@ export const fmtFlow = (balance: number) => {
   if (balance == null) return null;
   return String(Number(balance) / 100000000);
 };
+
+export const invariant = (fact:any, msg:any, ...rest:any) => {
+  if (!fact) {
+    const error:any = new Error(`INVARIANT ${msg}`)
+    error.stack = error.stack
+      .split("\n")
+      .filter((d:any) => !/at invariant/.test(d))
+      .join("\n")
+    console.error("\n\n---\n\n", error, "\n\n", ...rest, "\n\n---\n\n")
+    throw error
+  }
+}

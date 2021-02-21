@@ -12,7 +12,7 @@ import {
   limit,
 } from "@onflow/fcl";
 import { Address } from "@onflow/types";
-import { getTransactions, getQueryTemplate } from "../cadance/fungibleToken";
+import { getTransactions, getQueryTemplate } from "../cadance/nonFungibleToken";
 import { tx } from "../utils";
 import * as sdk from "@onflow/sdk";
 import * as t from "@onflow/types";
@@ -66,14 +66,14 @@ export const getBalance = (
   queryAddress?: string
 ) => {
   if (!address || !contractName) return Promise.resolve(false);
-  const { getBalances } = getQueryTemplate(address, contractName);
+  // const { getBalances } = getQueryTemplate(address, contractName);
   // prettier-ignore
-  return send([
-    script(getBalances()),
-    args([
-      arg(queryAddress? queryAddress: address, Address)
-    ])
-  ]).then(decode)
+  // return send([
+  //   script(getBalances()),
+  //   args([
+  //     arg(queryAddress? queryAddress: address, Address)
+  //   ])
+  // ]).then(decode)
 };
 
 export const mintToken = (

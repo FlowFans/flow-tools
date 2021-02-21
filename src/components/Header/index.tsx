@@ -31,7 +31,6 @@ const Header = (props: HeaderProps) => {
         fcl.unauthenticate()
       } else {
         fcl.authenticate()
-
       }
     }
 

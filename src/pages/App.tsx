@@ -25,6 +25,7 @@ import NonFungibleTokenIssue from './nonFungibleTokenIssue'
 import FungibleTokenQuery from './fungibleTokenQuery'
 import NonFungibleTokenQuery from './nonFungibleTokenQuery'
 import Account from './account'
+import CreateAccount from './createAccount'
 
 export const App = () => {
 
@@ -43,6 +44,7 @@ export const App = () => {
             <Route exact strict path="/account/:address" component={Account} />
             <Route exact strict path="/ft" component={FungibleTokens} />
             <Route exact strict path="/nft" component={NonFungibleTokens} />
+            <Route exact strict path="/createAccount" component={CreateAccount} />
             <Route exact strict path="/ft/issue" component={FungibleTokenIssue} />
             <Route exact strict path="/nft/issue" component={NonFungibleTokenIssue} />
             <Route exact strict path="/ft/query" component={FungibleTokenQuery} />
